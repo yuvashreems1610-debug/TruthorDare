@@ -245,22 +245,22 @@ class truthordare{
             System.out.println(playerNames[index]+"'s Turn");
             System.out.print("Choose Truth or Dare : ");
             String choice=sc.nextLine();
-            int[50] visitedKidsTruth={0};
-            int[50] visitedAdultsTruth={0};
-            int[50] visitedKidsDare={0};
-            int[50] visitedAdultsDare={0};
+            int[] visitedKidsTruth=new int[50];
+            int[] visitedAdultsTruth=new int[50];
+            int[] visitedKidsDare=new int[50];
+            int[] visitedAdultsDare=new int[50];
                 while(true){
                     if(choice.equalsIgnoreCase("truth")){
                         if(Category.equalsIgnoreCase("kids")){
                             while(true){
                                 int kidsTruthIndex = r.nextInt(kidsTruth.length);
-                                if(!visitedKidsTruth){
+                                if(visitedKidsTruth[kidsTruthIndex]==0){
                                     System.out.println("Question is "+kidsTruth[kidsTruthIndex]);
                                     visitedKidsTruth[kidsTruthIndex]=1;
                                     break;
                                 }
                                 else{
-                                    int kidsTruthIndex = r.nextInt(kidsTruth.length);
+                                    kidsTruthIndex = r.nextInt(kidsTruth.length);
                                 } 
                             }
                         }
