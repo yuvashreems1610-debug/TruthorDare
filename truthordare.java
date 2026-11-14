@@ -2,6 +2,14 @@
 import java.util.Scanner;
 import java.util.Random;
 class truthordare{
+
+    public static boolean choiceChecker(String choice){
+        if(choice.equalsIgnoreCase("Truth")|| choice.equalsIgnoreCase("Dare")){
+            return true;
+        }
+        return false;
+    }
+
     public static void main(String[]args){
         System.out.println("Game: Truth or Dare");
         Scanner sc=new Scanner(System.in);
@@ -238,21 +246,23 @@ class truthordare{
         String Continue="next";
         while(true){
             if(Continue.equalsIgnoreCase("next")){
+                Random r = new Random();
+                int index = r.nextInt(numberOfPlayers);
+                System.out.println(playerNames[index]+"'s Turn");
+                System.out.print("Choose Truth or Dare : ");
+                String choice=sc.nextLine();
+                while(!choiceChecker(choice)){
+                    System.out.print("You can only choose between Truth or Dare.\nChoose Truth or Dare: ");
+                    choice=sc.next();
+                }
 
-
-            Random r = new Random();
-            int index = r.nextInt(numberOfPlayers);
-            System.out.println(playerNames[index]+"'s Turn");
-            System.out.print("Choose Truth or Dare : ");
-            String choice=sc.nextLine();
-            int[] visitedKidsTruth=new int[50];
-            int[] visitedAdultsTruth=new int[50];
-            int[] visitedKidsDare=new int[50];
-            int[] visitedAdultsDare=new int[50];
-                while(true){
-                    if(choice.equalsIgnoreCase("truth")){
-                        if(Category.equalsIgnoreCase("kids")){
-                            while(true){
+                int[] visitedKidsTruth=new int[50];
+                int[] visitedAdultsTruth=new int[50];
+                int[] visitedKidsDare=new int[50];
+                int[] visitedAdultsDare=new int[50];
+                if(choice.equalsIgnoreCase("truth")){
+                    if(Category.equalsIgnoreCase("kids")){
+                        while(true){
                                 int kidsTruthIndex = r.nextInt(kidsTruth.length);
                                 if(visitedKidsTruth[kidsTruthIndex]==0){
                                     System.out.println("Question is "+kidsTruth[kidsTruthIndex]);
@@ -262,50 +272,69 @@ class truthordare{
                                 else{
                                     kidsTruthIndex = r.nextInt(kidsTruth.length);
                                 } 
-                            }
                         }
-                        else {
-                            int adultsTruthIndex = r.nextInt(adultsTruth.length);
-                            System.out.println("Question is "+adultsTruth[adultsTruthIndex]);
                         
+                    }
+                    else {
+                        while(true){
+                                int adultsTruthIndex = r.nextInt(adultsTruth.length);
+                                if(visitedAdultsTruth[adultsTruthIndex]==0){
+                                    System.out.println("Question is "+adultsTruth[adultsTruthIndex]);
+                                    visitedAdultsTruth[adultsTruthIndex]=1;
+                                    break;
+                                }
+                                else{
+                                    adultsTruthIndex = r.nextInt(adultsTruth.length);
+                                } 
                         }
-                        break;
-                
+                        
+                        
                     }
                 
-                    else if(choice.equalsIgnoreCase("dare")){
-                    
-                        if(Category.equalsIgnoreCase("kids")){
-                            int kidsDareIndex = r.nextInt(kidsDare.length);
-                            System.out.println("Dare is "+kidsDare[kidsDareIndex]);
+                }
+                else {
+                    if(Category.equalsIgnoreCase("kids")){
+                        while(true){
+                                int kidsDareIndex = r.nextInt(kidsDare.length);
+                                if(visitedKidsDare[kidsDareIndex]==0){
+                                    System.out.println("Question is "+kidsDare[kidsDareIndex]);
+                                    visitedKidsTruth[kidsDareIndex]=1;
+                                    break;
+                                }
+                                else{
+                                    kidsDareIndex = r.nextInt(kidsDare.length);
+                                } 
+                        }
+                        
 
+                    }
+                    else {
+                         while(true){
+                                int adultsDareIndex = r.nextInt(adultsDare.length);
+                                if(visitedAdultsDare[adultsDareIndex]==0){
+                                    System.out.println("Question is "+adultsDare[adultsDareIndex]);
+                                    visitedAdultsDare[adultsDareIndex]=1;
+                                    break;
+                                }
+                                else{
+                                    adultsDareIndex = r.nextInt(adultsDare.length);
+                                } 
                         }
-                        else {
-                            int adultsDareIndex = r.nextInt(adultsDare.length);
-                            System.out.println("Dare is "+adultsDare[adultsDareIndex]);
+                        
                             
-                        }
-                        break;
+                    }
                 
-                    }
-                    else{
-                        System.out.println("You can only choose between truth or dare");
-                        System.out.print("Choose Truth or Dare : ");
-                        choice=sc.nextLine();
-                    }
                 }
                 
                 System.out.print("To move on to nxt person enter next or to end game enter end : ");
                 Continue=sc.nextLine();
-               
-            
             }
             else if(Continue.equalsIgnoreCase("end")){
                 System.out.println("GAME OVER!!!");
                 break;
             }
             else{
-                System.out.println("Enter valid options");
+                System.out.println("\nEnter valid options");
                 System.out.print("To move on to next person enter next or to end game enter end : ");
                 Continue=sc.nextLine();
             }
