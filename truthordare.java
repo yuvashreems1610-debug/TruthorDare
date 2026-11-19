@@ -2,14 +2,6 @@
 import java.util.Scanner;
 import java.util.Random;
 class truthordare{
-
-    // public static boolean choiceChecker(String choice){
-    //     if(choice.equalsIgnoreCase("Truth")|| choice.equalsIgnoreCase("Dare")){
-    //         return true;
-    //     }
-    //     return false;
-    // }
-
     public static void main(String[]args){
         System.out.println("Game: Truth or Dare");
         Scanner sc=new Scanner(System.in);
