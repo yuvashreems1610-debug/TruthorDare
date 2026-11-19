@@ -15,6 +15,14 @@ class truthordare{
         }
         System.out.print("Category(kids/adults):");
         String Category=sc.nextLine();
+        while(true){
+            if(Category.equalsIgnoreCase("kids")|| Category.equalsIgnoreCase("adults")){
+                break;
+            }else{
+                System.out.print("Please choose either the Kids/Adults Category: ");
+                Category=sc.nextLine();
+            }
+        }
         String[] kidsTruth = {
         "What is your funniest childhood memory?",
         "What is your favourite cartoon?",
@@ -227,75 +235,64 @@ class truthordare{
         "Perform a 30-second comedy show."
         };
 
-        String Continue="next";
+        char Continue='>';
         while(true){
-            if(Continue.equalsIgnoreCase("next")){
-
-
-            Random r = new Random();
-            int index = r.nextInt(numberOfPlayers);
-            System.out.println(playerNames[index]+"'s Turn");
-            System.out.print("Choose Truth or Dare : ");
-            String choice=sc.nextLine();
-            if(choice.equalsIgnoreCase("truth")){
-                if(Category.equalsIgnoreCase("kids")){
-                    int kidsTruthIndex = r.nextInt(kidsTruth.length);
-                    System.out.println("Question is "+kidsTruth[kidsTruthIndex]);
+            if(Continue=='>'){
+                Random r = new Random();
+                int index = r.nextInt(numberOfPlayers);
+                System.out.println(playerNames[index]+"'s Turn");
+                System.out.print("1-> Truth\n2-> Dare\nChoose Truth or Dare : ");
+                int choice=sc.nextInt();
+                sc.nextLine();
+                while(choice!=1 && choice !=2){
+                    System.out.print("You can only choose between Truth or Dare.\nChoose Truth or Dare: ");
+                    choice=sc.nextInt();
+                    sc.nextLine();
                 }
-                else if(Category.equalsIgnoreCase("adults")){
-                    int adultsTruthIndex = r.nextInt(adultsTruth.length);
-                    System.out.println("Question is "+adultsTruth[adultsTruthIndex]);
-                    
-                }
-                else{
-                    System.out.println("You can only choose between kids or adults");
-                    System.out.print("Category(kids/adults):");
-                    Category=sc.nextLine();
 
-                }
-            }
-            else if(choice.equalsIgnoreCase("dare")){
                 
-                if(Category.equalsIgnoreCase("kids")){
-                    int kidsDareIndex = r.nextInt(kidsDare.length);
-                    System.out.println("Dare is "+kidsDare[kidsDareIndex]);
-
-                }
-                else if(Category.equalsIgnoreCase("adults")){
-                    int adultsDareIndex = r.nextInt(adultsDare.length);
-                    System.out.println("Dare is "+adultsDare[adultsDareIndex]);
-                    
-                }
-                else{
-                    System.out.println("You can only choose between kids or adults");
-                    System.out.print("Category(kids/adults):");
-                    Category=sc.nextLine();
-
-                }
-            }
-            else{
-                System.out.println("You can only choose between truth or dare");
-                System.out.print("Choose Truth or Dare : ");
-                choice=sc.nextLine();
-            }
+                if(choice==1){
+                    if(Category.equalsIgnoreCase("kids")){
+                        int kidsTruthIndex = r.nextInt(kidsTruth.length);
+                        System.out.println("Question is "+kidsTruth[kidsTruthIndex]);
+                    }
+                    else {
+                        int adultsTruthIndex = r.nextInt(adultsTruth.length);
+                        System.out.println("Question is "+adultsTruth[adultsTruthIndex]);
+                        
+                    }
                 
-                System.out.print("To move on to nxt person enter next or to end game enter end : ");
-                Continue=sc.nextLine();
-               
-            
+                }
+                else {
+                    if(Category.equalsIgnoreCase("kids")){
+                        int kidsDareIndex = r.nextInt(kidsDare.length);
+                        System.out.println("Dare is "+kidsDare[kidsDareIndex]);
+
+                    }
+                    else {
+                        int adultsDareIndex = r.nextInt(adultsDare.length);
+                        System.out.println("Dare is "+adultsDare[adultsDareIndex]);
+                            
+                    }
+                
+                }
+                
+                System.out.print("To move to next person = '>'\nTo end the game = '.'\n");
+                System.out.print("Enter the answer: ");
+                Continue=sc.next().charAt(0);
             }
-            else if(Continue.equalsIgnoreCase("end")){
+            else if(Continue=='.'){
                 System.out.println("GAME OVER!!!");
                 break;
             }
             else{
-                System.out.println("Enter valid options");
-                System.out.print("To move on to next person enter next or to end game enter end : ");
-                Continue=sc.nextLine();
+                System.out.println("\nEnter valid options");
+                System.out.print("To move to next person = '>'\nTo end the game = '.'\n");
+                System.out.print("Enter the answer: ");
+                Continue=sc.next().charAt(0);
             }
 
         }
-        
-        
+        sc.close();
     }
 }
