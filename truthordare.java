@@ -3,12 +3,12 @@ import java.util.Scanner;
 import java.util.Random;
 class truthordare{
 
-    public static boolean choiceChecker(String choice){
-        if(choice.equalsIgnoreCase("Truth")|| choice.equalsIgnoreCase("Dare")){
-            return true;
-        }
-        return false;
-    }
+    // public static boolean choiceChecker(String choice){
+    //     if(choice.equalsIgnoreCase("Truth")|| choice.equalsIgnoreCase("Dare")){
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
     public static void main(String[]args){
         System.out.println("Game: Truth or Dare");
@@ -243,21 +243,23 @@ class truthordare{
         "Perform a 30-second comedy show."
         };
 
-        String Continue="next";
+        char Continue='>';
         while(true){
-            if(Continue.equalsIgnoreCase("next")){
+            if(Continue=='>'){
                 Random r = new Random();
                 int index = r.nextInt(numberOfPlayers);
                 System.out.println(playerNames[index]+"'s Turn");
-                System.out.print("Choose Truth or Dare : ");
-                String choice=sc.nextLine();
-                while(!choiceChecker(choice)){
+                System.out.print("1-> Truth\n2-> Dare\nChoose Truth or Dare : ");
+                int choice=sc.nextInt();
+                sc.nextLine();
+                while(choice!=1 && choice !=2){
                     System.out.print("You can only choose between Truth or Dare.\nChoose Truth or Dare: ");
-                    choice=sc.next();
+                    choice=sc.nextInt();
+                    sc.nextLine();
                 }
 
                 
-                if(choice.equalsIgnoreCase("truth")){
+                if(choice==1){
                     if(Category.equalsIgnoreCase("kids")){
                         int kidsTruthIndex = r.nextInt(kidsTruth.length);
                         System.out.println("Question is "+kidsTruth[kidsTruthIndex]);
@@ -283,19 +285,22 @@ class truthordare{
                 
                 }
                 
-                System.out.print("To move on to nxt person enter next or to end game enter end : ");
-                Continue=sc.nextLine();
+                System.out.print("To move to next person = '>'\nTo end the game = '.'\n");
+                System.out.print("Enter the answer: ");
+                Continue=sc.next().charAt(0);
             }
-            else if(Continue.equalsIgnoreCase("end")){
+            else if(Continue=='.'){
                 System.out.println("GAME OVER!!!");
                 break;
             }
             else{
                 System.out.println("\nEnter valid options");
-                System.out.print("To move on to next person enter next or to end game enter end : ");
-                Continue=sc.nextLine();
+                System.out.print("To move to next person = '>'\nTo end the game = '.'\n");
+                System.out.print("Enter the answer: ");
+                Continue=sc.next().charAt(0);
             }
 
         }
+        sc.close();
     }
 }
